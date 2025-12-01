@@ -15,7 +15,7 @@ const App: React.FC = () => {
         if (savedTheme) {
             return savedTheme === 'dark';
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return window.matchMedia('(prefers-color-scheme: light)').matches;
     }
     return false;
   });
