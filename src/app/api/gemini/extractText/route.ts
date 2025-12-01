@@ -1,13 +1,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { GoogleGenerativeAI, TaskType } from "@google/generative-ai";
-import { UploadedFile, AnalysisResult } from "@/types";
 import { NextResponse } from "next/server";
 import chunkModel from "@/models/chunk.model";
 import dbConnect from "@/lib/dbConnect";
 import { createChunks } from "@/lib/createChunks";
 
-const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_API_KEY });
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY!);
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function POST(req : Request) {
   const formData = await req.formData();

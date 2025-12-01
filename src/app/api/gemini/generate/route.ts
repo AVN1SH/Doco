@@ -1,17 +1,16 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { UploadedFile, AnalysisResult } from "@/types";
+import { AnalysisResult } from "@/types";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import { GoogleGenerativeAI, TaskType } from "@google/generative-ai";
 import ChunkModel from "@/models/chunk.model";
 
-const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_API_KEY });
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY!);
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function POST(req : Request) {
   const { prompt } = await req.json();
 
-  console.log(prompt, "-----------------------")
 
   const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
 
