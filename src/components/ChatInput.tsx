@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { FileText, Bot, ArrowDown, CheckCircle2Icon } from 'lucide-react';
+import { FileText, Bot, ArrowDown, CheckCircle2Icon, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AnalysisResult, AppState, HistoryItem, UploadedFile } from '../types';
 import ResultDisplay from './ResultDisplay';
@@ -83,8 +83,6 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
     setAppState(AppState.RESULT);
   }, [historyItem])
 
-  console.log(historyItem, "historyItem")
-
   return (
     <div className="flex flex-col items-center justify-center p-6 relative overflow-hidden font-sans w-full">
       <div className='flex flex-col md:flex-row gap-8 w-full'>
@@ -131,13 +129,13 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
           <div className="relative w-full max-w-xl z-10 group">
 
             {/* The White "Card" Input */}
-            <div className="bg-white p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 flex items-center gap-4 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] focus-within:ring-2 focus-within:ring-blue-100">
+            <div className="bg-white p-2 md:p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 flex items-center gap-4 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] focus-within:ring-2 focus-within:ring-blue-100">
 
               {/* User Avatar (Left Side) */}
               <div className="flex-shrink-0">
-                <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-200 border border-gray-100 shadow-inner items-center justify-center flex flex-nowrap">
-                  <FileText className='size-7 text-gray-500' />
-                  <CheckCircle2Icon className='size-4 text-green-500 fill-green-200 right-2 bottom-2 absolute' />
+                <div className="relative size-9 md:size-12 rounded-xl overflow-hidden bg-gray-200 border border-gray-100 shadow-inner items-center justify-center flex flex-nowrap">
+                  <FileText className='size-5 md:size-7 text-gray-500' />
+                  <CheckCircle2Icon className='size-2 md:size-4 text-green-500 fill-green-200 right-2 bottom-2 absolute' />
                 </div>
               </div>
 
@@ -146,13 +144,13 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                className="flex-grow bg-transparent text-xl text-gray-700 font-medium placeholder-gray-300 outline-none w-full"
+                className="flex-grow bg-transparent text-sm md:text-xl text-gray-700 font-medium placeholder-gray-300 outline-none w-full"
                 placeholder="Summarize this doc for me?"
               />
 
               {/* Optional: Send/Action Button (Hidden by default in image, but good for UX) */}
               <button onClick={handleSubmit} className="p-2 cursor-pointer rounded-xl hover:bg-gray-50 text-gray-400 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                <Send className="size-4 md:size-7" />
               </button>
             </div>
 
