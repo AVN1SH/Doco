@@ -1,6 +1,7 @@
 # 📘 Doco – AI-Powered Document Assistant
 
-<!-- PLACE PROJECT IMAGE / BANNER HERE -->
+![Screenshot](https://drive.usercontent.google.com/download?id=1Lk3ZRDFNBrGDOa4imhXlMBNbPs61mxSb&export=view&authuser=0)
+![Screenshot](https://drive.usercontent.google.com/download?id=1Wp69CJ-ucnOVvyrLlkB0IR3H5MD4MpMI&export=view&authuser=0)
 
 Doco is an AI-powered document intelligence tool built with **Next.js**, **Gemini AI**, and **MongoDB Vector Search**.  
 Upload any **PDF, Image, or Document**, and Doco instantly extracts text, summarizes content, identifies key points, and provides actionable insights using a powerful RAG (Retrieval-Augmented Generation) pipeline.
