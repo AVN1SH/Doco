@@ -81,6 +81,11 @@ const Upload = () => {
           body: formData
         });
 
+        if(result.status !== 200) {
+          setAppState(AppState.ERROR);
+          return;
+        }
+        
         const resultData = (await result.json()).data;
 
         if(resultData === "success"){
@@ -129,7 +134,7 @@ const Upload = () => {
     };
   return (
     <div className="size-full flex flex-col-reverse md:flex-row">
-      <div className='flex-1'>
+      <div className='flex-1 md:flex-none md:max-w-sm'>
         <HistoryList history={history} onSelect={handleHistorySelect} />
       </div>
 

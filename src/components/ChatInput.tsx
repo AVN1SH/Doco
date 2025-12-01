@@ -20,31 +20,6 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
-  // Theme State
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        return savedTheme === 'dark';
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return false;
-  });
-
-  // Apply Theme
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
-
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
-
   // Load history on mount
   useEffect(() => {
     const savedHistory = localStorage.getItem('documagic_history');
@@ -70,6 +45,11 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
         method: "POST",
         body: JSON.stringify(value)
       })
+
+      if(response.status !== 200) {
+        setAppState(AppState.READY);
+        return;
+      }
 
       const result = await response.text();
       const resultData = await JSON.parse(result);
@@ -132,7 +112,7 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
 
           <button
             onClick={() => {handleReset(); onReset();}}
-            className="w-full py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm"
+            className="w-full cursor-pointer py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm"
           >
             Analyze Another File
           </button>
@@ -171,7 +151,7 @@ const ChatInput: React.FC<ResultDisplayProps> = ({ historyItem, file, onReset, c
               />
 
               {/* Optional: Send/Action Button (Hidden by default in image, but good for UX) */}
-              <button onClick={handleSubmit} className="p-2 rounded-xl hover:bg-gray-50 text-gray-400 transition-colors">
+              <button onClick={handleSubmit} className="p-2 cursor-pointer rounded-xl hover:bg-gray-50 text-gray-400 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
               </button>
             </div>
