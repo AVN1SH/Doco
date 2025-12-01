@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📘 Doco – AI-Powered Document Assistant
 
-## Getting Started
+![Screenshot](https://drive.usercontent.google.com/download?id=1Lk3ZRDFNBrGDOa4imhXlMBNbPs61mxSb&export=view&authuser=0)
+![Screenshot](https://drive.usercontent.google.com/download?id=1Wp69CJ-ucnOVvyrLlkB0IR3H5MD4MpMI&export=view&authuser=0)
 
-First, run the development server:
+Doco is an AI-powered document intelligence tool built with **Next.js**, **Gemini AI**, and **MongoDB Vector Search**.  
+Upload any **PDF, Image, or Document**, and Doco instantly extracts text, summarizes content, identifies key points, and provides actionable insights using a powerful RAG (Retrieval-Augmented Generation) pipeline.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔍 Document Upload
+Upload:
+- PDF files  
+- Images (PNG, JPG, WEBP)  
+- Scanned documents  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Supports both **file** and **base64** input.
 
-## Learn More
+### 🧠 AI Text Extraction
+Uses **Gemini Vision** to extract text from:
+- PDFs  
+- Images  
+- Scanned documents  
+- Screenshots  
 
-To learn more about Next.js, take a look at the following resources:
+### 📚 Smart Chunking
+Documents are:
+- Split into optimized text chunks  
+- Embedded using **Gemini Embedding Model `text-embedding-004`**  
+- Stored in MongoDB with TTL cleanup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🗂️ Vector Search (RAG Engine)
+User queries are:
+- Embedded into vectors  
+- Matched against stored chunk embeddings  
+- Queried with **MongoDB `$vectorSearch`**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Top relevant chunks are passed to Gemini for final reasoning.
 
-## Deploy on Vercel
+### 🤖 Structured AI Responses
+The assistant returns a JSON object containing:
+- `summary` — 2–3 sentence overview  
+- `keyPoints` — 3–5 important points  
+- `actionItems` — suggested next steps  
+- `tone` — one-word tone classification  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ⚡ Built with Modern Stack
+- **Next.js 14 (App Router)**  
+- **MongoDB Atlas Vector Index**  
+- **Gemini Flash & Embedding Models**  
+- **TailwindCSS**  
+- **TypeScript**  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧩 Project Architecture
+
+User Uploads File → Extract Text → Chunk Text → Generate Embeddings
+↓ ↓ ↓ ↓
+Gemini Vision Chunking Gemini Embedding MongoDB Store
+↓
+User Query → Embed Query → Vector Search → Retrieve Chunks → Gemini RAG → Final Answer
+
+---
